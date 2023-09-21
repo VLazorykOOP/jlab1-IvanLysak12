@@ -1,0 +1,273 @@
+-----------------------------------------------------------------------------------------
+					Task 1
+-----------------------------------------------------------------------------------------
+1.1. Вхідні дані дійсного типу, результат – дійсного;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.print("X = ");
+	    double valueX = scanner.nextDouble();
+	    System.out.print("Y = ");
+	    double valueY = scanner.nextDouble(); 
+	    
+	    double X_multiplication_Y = valueX * valueY;
+	    double denominator = (int)Math.pow(valueX + valueY, 3);
+	    double numerator = (int)Math.pow(valueX, 2) + (int)Math.pow(valueY, 2);
+	    double X_subtraction_Y = valueX-valueY;
+	    
+	    double result = X_multiplication_Y + numerator / denominator * X_subtraction_Y;
+	    
+	    System.out.print(result);
+		
+	    scanner.close();
+	}
+}
+-----------------------------------------------------------------------------------------
+1.1.1 Вхідні дані дійсного типу, результат – дійсного;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.print("X = ");
+	    double valueX = scanner.nextDouble();
+	    System.out.print("Y = ");
+	    double valueY = scanner.nextDouble(); 
+	    
+	    double result = (valueX * valueY) + (Math.pow(valueX + valueY, 3)) / (Math.pow(valueX, 2) + Math.pow(valueY, 2)) * (valueX-valueY);
+	    
+	    System.out.print(result);
+		
+		scanner.close();
+	}
+}
+-----------------------------------------------------------------------------------------
+1.2 Вхідні дані цілого типу, результат – дійсного.
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.print("X = ");
+	    int valueX = scanner.nextInt();
+	    System.out.print("Y = ");
+	    int valueY = scanner.nextInt(); 
+	    
+	    double result = (valueX * valueY) + (Math.pow(valueX + valueY, 3)) / (Math.pow(valueX, 2) + Math.pow(valueY, 2)) * (valueX-valueY);
+	    
+	    System.out.print(result);
+		
+		scanner.close();
+	}
+}
+-----------------------------------------------------------------------------------------
+1.3 Вхідні дані дійсного типу, результат – цілого.
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.print("X = ");
+	    double valueX = scanner.nextDouble();
+	    System.out.print("Y = ");
+	    double valueY = scanner.nextDouble(); 
+	    
+	    int result = (valueX * valueY) + (Math.pow(valueX + valueY, 3)) / (Math.pow(valueX, 2) + Math.pow(valueY, 2)) * (valueX-valueY);
+	    
+	    System.out.print(result);
+		
+		scanner.close();
+	}
+}
+-----------------------------------------------------------------------------------------
+					Task 2
+-----------------------------------------------------------------------------------------
+Задано масив дійсних чисел A(n), n <= 200. Розробити програму, яка будує масив B(n)
+за правилом: bi є середнім арифметичним значенням чисел a1 a2, ..., an, крім ai, i = 1,2,...,n.
+-----------------------------------------------------------------------------------------
+					Task 3
+-----------------------------------------------------------------------------------------
+Якщо елементи i-го рядка матриці A більші ніж відповідні елементи i-го рядка матриці B, 
+то Х(і) = 1. Інакше - Х(і) = 0.
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+
+    public static int Matrix_Size_Input(Scanner scanner) {
+       int size = 0;
+     do {
+	        System.out.print("Input size of arrays : ");    
+	        size = scanner.nextInt();
+	        
+    	    if(size > 15 || size <= 0) {
+    	        System.out.println("InCorrect size. Try again ");
+    	    }
+
+	    } while(size > 15 || size <= 0);
+	    return size;
+    }
+    public static int Rows_Input(Scanner scanner, int size) {
+        int key_rows = 0;
+        do {
+            System.out.print("Input number of rows: ");
+            key_rows = scanner.nextInt();
+            
+            if(key_rows > size) {
+                System.out.println("InCorrect rows. Try again");
+            }
+            
+        } while(key_rows > size);
+        return key_rows;
+    }
+    
+    public static void Set_Matrix_Element(int[][] arr, int size) {
+        Random random = new Random();
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                arr[i][j] = random.nextInt(100);       
+            }
+        }
+    }
+    public static void Show_Matrix(int[][] arr, int size) {
+        for(int i = 0; i < size; ++i) {
+		    for(int j = 0; j < size; ++j) {
+		        System.out.print(arr[i][j] + " ");
+		    }
+		    System.out.println();
+		}
+		System.out.println();
+    }  
+    public static void Fill_Vector(int[]Array_X, int[][]Array_A, int[][]Array_B, int size, int key_rows) {
+        
+        int temp_A = 0;
+        int temp_B = 0;
+        
+        for(int i = 0; i < size; ++i) {
+           temp_A = Array_A[key_rows][i];
+           System.out.print(temp_A + " ");
+        }
+        System.out.println();
+        
+        for(int j = 0; j < size; ++j) {
+            temp_B = Array_B[key_rows][j];
+            System.out.print(temp_B + " ");
+        }
+        for(int i = 0; i < size; ++i) {
+            if(temp_A > temp_B) {
+                Array_X[i] = 1;
+            }
+            else { Array_X[i] = 0; } 
+        }
+        System.out.println();
+        
+        System.out.print("Array_X = ");
+        for(int i = 0; i < size; ++i) {
+            System.out.print(Array_X[i] + " ");
+        }
+    }
+    
+	public static void main(String[] args) {
+	  
+	    Scanner scanner = new Scanner(System.in); 
+	    int SIZE = Matrix_Size_Input(scanner);
+	    
+		int[][]Array_A = new int[SIZE][SIZE];
+		int[][]Array_B = new int[SIZE][SIZE];
+		int[]Array_X = new int[SIZE];
+		
+        	Set_Matrix_Element(Array_A, SIZE);
+		Set_Matrix_Element(Array_B, SIZE);
+		
+		System.out.println("Array A:");
+		Show_Matrix(Array_A, SIZE);
+		System.out.println("Array B:");
+		Show_Matrix(Array_B, SIZE);
+		
+		int key_rows = Rows_Input(scanner, SIZE);
+		Fill_Vector(Array_X, Array_A, Array_B, SIZE, key_rows);
+		
+	}	
+}
+
+-----------------------------------------------------------------------------------------
+					Task 4
+-----------------------------------------------------------------------------------------
+ Задано текст, слова в якому розділені пробілами і розділовими знаками. Розробити програму, яка вилучає в кожному слові цього тексту всі входження літери, яку ввів користувач з клавіатури.
+
+import java.util.Scanner;
+
+public class Main {
+    
+    public static char Input_Characters() {
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input symbol, which you want to erase : ");
+        char key = scanner.next().charAt(0);
+        return key;
+       // scanner.close();
+    }
+
+    public static String Erase_Special_Characters(String str, char key) {
+      StringBuilder newStr = new StringBuilder();
+        for (int i = 0; i < str.length(); ++i) {
+            char character = str.charAt(i);
+            if (character != key) {
+                newStr.append(character);
+            }
+        }
+        return newStr.toString();
+    }
+
+	public static void main(String[] args) {
+
+        String str = "Good morning, my neighbours. Yes, you too";
+		
+		char character = Input_Characters();
+	    String result = Erase_Special_Characters(str, character);
+	    System.out.println(result);
+	}
+}
+-----------------------------------------------------------------------------------------
+				     Task 4.1
+-----------------------------------------------------------------------------------------
+ Задано текст, слова в якому розділені пробілами і розділовими знаками. Розробити програму, яка вилучає в кожному слові цього тексту всі попередні входження останньої літери.
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static String Erase_Special_Characters(String str) {
+      StringBuilder newStr = new StringBuilder();
+        for (int i = 0; i < str.length(); ++i) {
+            char character = str.charAt(i);
+            if (character != str.charAt(str.length() - 1)) {
+                newStr.append(character);
+            }
+        }
+        return newStr.toString();
+    }
+
+	public static void main(String[] args) {
+
+        String str = "Good morning, my neighbours. Yes, you too";
+        System.out.println(str);
+        
+	    String result = Erase_Special_Characters(str);
+	    System.out.println(result);
+	}
+}
+
+
+
