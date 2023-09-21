@@ -94,6 +94,65 @@ public class Main {
 -----------------------------------------------------------------------------------------
 Задано масив дійсних чисел A(n), n <= 200. Розробити програму, яка будує масив B(n)
 за правилом: bi є середнім арифметичним значенням чисел a1 a2, ..., an, крім ai, i = 1,2,...,n.
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+    
+    public static int Size_Checker() {
+        int size = 0;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            
+            System.out.print("Input size of array : ");
+            size = scanner.nextInt();
+            if(size <= 0 || size > 200) {
+                System.out.println("Incorrect size. Try again");
+            }
+            
+        } while(size <= 0 || size > 200);
+        return size;
+    }
+    
+    public static void Generate_Element(int[] arr, int size) {
+        Random random = new Random();
+        for(int i = 0; i < size; ++i) {
+            arr[i] = random.nextInt(100);
+        }
+    }
+    
+    public static void Show_Array(int arr[], int size) {
+        for(int i = 0; i < size; ++i) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void Middle_Average(int arr_A[], int arr_B[], int size) {
+        for (int i = 0; i < size; i++) {
+            int sum = 0;
+            for (int j = 0; j < size; j++) {
+                if (j != i) {
+                     sum += arr_A[j];
+                }
+            }
+            arr_B[i] = sum / (size - 1);
+        }
+    }
+  
+	public static void main(String[] args) {
+	    int SIZE = Size_Checker();
+	    int[] arr_A = new int[SIZE];
+	    int[] arr_B = new int[SIZE];
+	    
+	    Generate_Element(arr_A, SIZE);
+	    Show_Array(arr_A, SIZE);
+	    Middle_Average(arr_A, arr_B, SIZE);
+	    Show_Array(arr_B, SIZE);
+	}
+}
+
 -----------------------------------------------------------------------------------------
 					Task 3
 -----------------------------------------------------------------------------------------
